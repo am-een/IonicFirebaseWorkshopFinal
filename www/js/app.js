@@ -48,19 +48,61 @@ angular.module('MoviesApp', ['ionic','firebase'])
 .controller('SigninCtrl',function ($scope,$firebaseAuth,$state) {
   $scope.u = {};
   $scope.signin = function () {
+<<<<<<< HEAD
+    $firebaseAuth(fbRef).$authWithPassword({
+      email:$scope.u.email,
+      password:$scope.u.password
+    }).then(function (authData) {
+      $scope.u = {};
+      $state.go('mymovies');
+    }).catch(function (error) {
+      alert("Error: "+error.message);
+    })
+=======
     //TODO: sign in
+>>>>>>> 29f16ed4bc83a05022f15c46914a3eed63212dd2
   }
 })
 
 .controller('SignupCtrl',function ($scope,$firebaseAuth,$state) {
   $scope.u = {};
   $scope.signup = function () {
+<<<<<<< HEAD
+    $firebaseAuth(fbRef).$createUser({
+      email:$scope.u.email,
+      password:$scope.u.password
+    }).then(function (authData) {
+      $scope.u = {};
+      $state.go('signin');
+    }).catch(function (error) {
+      alert("Error: "+error.message);
+    })
+=======
     //TODO: signup
+>>>>>>> 29f16ed4bc83a05022f15c46914a3eed63212dd2
   }
 })
 
 .controller('MoviesCtrl',function ($scope,$ionicModal,$firebaseArray,$firebaseAuth,$state) {
 
+<<<<<<< HEAD
+  $ionicModal.fromTemplateUrl('views/add.html',{
+    scope:$scope,
+    animation:'slide-in-up'
+  }).then(function (modal) {
+    $scope.addModal = modal;
+  });
+  $ionicModal.fromTemplateUrl('views/edit.html',{
+    scope:$scope,
+    animation:'slide-in-up'
+  }).then(function (modal) {
+    $scope.editModal = modal;
+  })
+
+
+  $scope.movies = $firebaseArray(fbRef.child('movies'));
+  $scope.m = {};
+=======
   //TODO: Create AddModal and Edit Modal
 
   $scope.movies = [
@@ -81,30 +123,58 @@ angular.module('MoviesApp', ['ionic','firebase'])
 
   $scope.m = {};
 
+>>>>>>> 29f16ed4bc83a05022f15c46914a3eed63212dd2
   $scope.getAuth = function () {
     return $firebaseAuth(fbRef).$getAuth().uid;
   }
   $scope.add = function () {
+<<<<<<< HEAD
+    //State: 0 - Waiting ~ 1 - Done
+    $scope.m.state = 0;
+    $scope.m.uid = $scope.getAuth();
+    $scope.movies.$add($scope.m).then(function (ref) {
+      $scope.addModal.hide();
+      $scope.m = {};
+    })
+  }
+  $scope.delete = function (movie) {
+    $scope.movies.$remove(movie);
+=======
     //TODO: State: 0 - Waiting ~ 1 - Done
   //TODO: insert movie in database
   }
   $scope.delete = function (movie) {
     //TODO: remove movie
+>>>>>>> 29f16ed4bc83a05022f15c46914a3eed63212dd2
   }
   $scope.openEdit = function (movie) {
     $scope.m = movie;
     $scope.editModal.show();
   }
   $scope.edit = function () {
+<<<<<<< HEAD
+    $scope.movies.$save($scope.m);
+    $scope.editModal.hide();
+    $scope.m = {};
+=======
     //TODO: edit movie
+>>>>>>> 29f16ed4bc83a05022f15c46914a3eed63212dd2
   }
   $scope.changeState = function (movie) {
     if(movie.state === 0){
       movie.state = 1;
+<<<<<<< HEAD
+      $scope.movies.$save(movie);
+    }else{
+      movie.state = 0;
+      $scope.movies.$save(movie);
+    }
+=======
     }else{
       movie.state = 0;
     }
     //TODO: update movie in DB
+>>>>>>> 29f16ed4bc83a05022f15c46914a3eed63212dd2
   }
   $scope.logout = function () {
     $firebaseAuth(fbRef).$unauth();
